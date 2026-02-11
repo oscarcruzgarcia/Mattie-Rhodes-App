@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mattie Rhodes Center Community Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="language-toggle" role="group" aria-label="Language selector">
+      <button id="lang-en" type="button" class="lang-btn active">English</button>
+      <button id="lang-es" type="button" class="lang-btn">Español</button>
+    </div>
+
+    <section id="auth-screen" class="auth-screen" aria-live="polite">
+      <div class="auth-card">
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
+
+        <img
+          class="auth-logo"
+          src="https://mattierhodes.org/wp-content/uploads/2024/04/MattieRhodes-Logo.png"
+          alt="Mattie Rhodes Center logo"
+        />
+
+        <h1 id="auth-title">Welcome to the Mattie Rhodes Community Hub</h1>
+        <p id="auth-subtitle" class="auth-subtitle">
+          Please sign in with your registered email and password, or create a new account to continue.
+        </p>
+
+        <div class="auth-tabs" role="tablist" aria-label="Authentication options">
+          <button id="show-signin" class="auth-tab active" role="tab" aria-selected="true" type="button">Sign In</button>
+          <button id="show-register" class="auth-tab" role="tab" aria-selected="false" type="button">Create Account</button>
+        </div>
+
+        <form id="signin-form" class="stacked-form auth-form" autocomplete="on">
+          <label id="signin-email-label">
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label id="signin-password-label">
+            Password
+            <input type="password" name="password" required />
+          </label>
+          <button id="signin-submit" type="submit">Sign In</button>
+        </form>
+
+        <form id="register-form" class="stacked-form auth-form hidden" autocomplete="on">
+          <label id="register-name-label">
+            Full Name
+            <input type="text" name="name" required />
+          </label>
+          <label id="register-email-label">
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label id="register-password-label">
+            Password
+            <input type="password" name="password" minlength="6" required />
+          </label>
+          <button id="register-submit" type="submit">Create Account</button>
+        </form>
+
+        <p id="auth-message" class="message auth-message"></p>
+      </div>
+    </section>
+
+    <div id="app-root" class="hidden">
+      <header class="site-header">
+        <div class="header-content">
+          <img
+            class="brand-logo"
+            src="https://mattierhodes.org/wp-content/uploads/2024/04/MattieRhodes-Logo.png"
+            alt="Mattie Rhodes Center logo"
+          />
+          <div>
+            <p class="eyebrow">Mattie Rhodes Center</p>
+            <h1 id="app-title">Community Hub</h1>
+            <p id="app-subtitle" class="subtitle">
+              Programs and support that strengthen social cohesion, economic stability,
+              and access to education, healthcare, and affordable housing.
+            </p>
+          </div>
+          <div class="header-actions">
+            <p id="welcome-user" class="welcome-user"></p>
+            <button id="signout-button" type="button" class="signout-button">Sign Out</button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="card" id="about-section">
+          <h2 id="about-title">How Mattie Rhodes Center Helps</h2>
+          <p id="about-copy">
+            We envision a vibrant, connected community in which individuals and families
+            are healthy, safe, and equipped to thrive.
+          </p>
+          <ul class="chip-list" id="program-list"></ul>
+          <p id="contact-note" class="contact-note">
+            Administrative Offices: 148 N. Topping Ave., Kansas City, MO 64123 ·
+            816-471-2536
+          </p>
+        </section>
+
+        <section class="card" id="events-section">
+          <h2 id="events-title">Interactive Events Calendar</h2>
+          <p id="events-subtitle">Browse months ahead, click a date, then click an event to register or volunteer when available.</p>
+
+          <div class="calendar-layout">
+            <div class="calendar-panel">
+              <div class="calendar-toolbar">
+                <button id="prev-month" type="button" aria-label="Previous month">←</button>
+                <h3 id="calendar-month-label"></h3>
+                <button id="next-month" type="button" aria-label="Next month">→</button>
+              </div>
+              <div id="calendar-weekdays" class="calendar-weekdays"></div>
+              <div id="calendar-grid" class="calendar-grid"></div>
+            </div>
+
+            <div class="calendar-details">
+              <h3 id="selected-date-heading">Select a date</h3>
+              <ul id="event-list" class="list"></ul>
+
+              <div id="event-action-panel" class="event-action-panel hidden">
+                <h4 id="event-title"></h4>
+                <p id="event-meta" class="meta-text"></p>
+                <p id="event-description" class="meta-text"></p>
+
+                <form id="attend-form" class="stacked-form hidden">
+                  <h5 id="attend-form-title">Register to Attend</h5>
+                  <label id="attend-name-label">
+                    Full Name
+                    <input type="text" name="name" required />
+                  </label>
+                  <label id="attend-email-label">
+                    Email
+                    <input type="email" name="email" required />
+                  </label>
+                  <label id="attend-notes-label">
+                    Notes
+                    <textarea id="attend-notes-input" name="notes" rows="2" placeholder="Any accessibility or support needs?"></textarea>
+                  </label>
+                  <button id="attend-submit" type="submit">Submit Attendance Registration</button>
+                </form>
+
+                <form id="event-volunteer-form" class="stacked-form hidden">
+                  <h5 id="event-volunteer-title">Volunteer for this Event</h5>
+                  <label id="event-volunteer-name-label">
+                    Full Name
+                    <input type="text" name="name" required />
+                  </label>
+                  <label id="event-volunteer-email-label">
+                    Email
+                    <input type="email" name="email" required />
+                  </label>
+                  <label id="event-volunteer-interest-label">
+                    Volunteer Interest
+                    <textarea id="event-volunteer-interest-input" name="interest" rows="2" placeholder="Set-up, check-in, youth activities, etc." required></textarea>
+                  </label>
+                  <button id="event-volunteer-submit" type="submit">Submit Volunteer Registration</button>
+                </form>
+
+                <p id="event-action-message" class="message"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="volunteer-section">
+          <h2 id="general-volunteer-title">General Volunteer Sign-Up</h2>
+          <p id="general-volunteer-subtitle">Get involved in youth, arts, health, and community support programs.</p>
+          <form id="volunteer-form" class="stacked-form">
+            <label id="volunteer-name-label">
+              Full Name
+              <input type="text" name="name" required />
+            </label>
+            <label id="volunteer-email-label">
+              Email
+              <input type="email" name="email" required />
+            </label>
+            <label id="volunteer-interest-label">
+              Program Interest
+              <select name="interest" required>
+                <option value="">Select one</option>
+                <option>Community Behavioral Health</option>
+                <option>Youth Development</option>
+                <option>Community Economic Development</option>
+                <option>Cultural Arts</option>
+                <option>Public Health</option>
+                <option>Public Safety</option>
+              </select>
+            </label>
+            <label id="volunteer-availability-label">
+              Availability
+              <textarea id="volunteer-availability-input" name="availability" rows="3" placeholder="Weekdays, evenings, Saturdays, etc." required></textarea>
+            </label>
+            <button id="volunteer-submit" type="submit">Submit Volunteer Request</button>
+          </form>
+          <p id="volunteer-message" class="message" aria-live="polite"></p>
+        </section>
+
+        <section class="card" id="portal-section">
+          <h2 id="portal-title">Client & Provider Portal (Demo)</h2>
+          <p id="portal-subtitle">
+            Message service providers and track your appointments for behavioral
+            health, public health, and other support services.
+          </p>
+
+          <div class="portal-grid">
+            <div>
+              <h3 id="message-title">Send Message</h3>
+              <form id="message-form" class="stacked-form">
+                <label id="message-provider-label">
+                  Provider or Team Name
+                  <input type="text" name="provider" required />
+                </label>
+                <label id="message-body-label">
+                  Message
+                  <textarea name="message" rows="4" required></textarea>
+                </label>
+                <button id="message-submit" type="submit">Send Message</button>
+              </form>
+              <p id="message-status" class="message" aria-live="polite"></p>
+              <ul id="message-list" class="list"></ul>
+            </div>
+
+            <div>
+              <h3 id="appointments-title">Manage Appointments</h3>
+              <form id="appointment-form" class="stacked-form">
+                <label id="appointment-provider-label">
+                  Service Area
+                  <select name="provider" required>
+                    <option value="">Select a service area</option>
+                    <option>Community Behavioral Health</option>
+                    <option>Public Health (La Clínica)</option>
+                    <option>Youth Development</option>
+                    <option>Public Safety</option>
+                  </select>
+                </label>
+                <label id="appointment-date-label">
+                  Appointment Date
+                  <input type="date" name="date" required />
+                </label>
+                <label id="appointment-time-label">
+                  Appointment Time
+                  <input type="time" name="time" required />
+                </label>
+                <button id="appointment-submit" type="submit">Add Appointment</button>
+              </form>
+              <ul id="appointment-list" class="list"></ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
